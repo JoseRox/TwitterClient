@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bg_shadow"
+        android:orientation="horizontal"
+
+        >
+
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:layout_marginBottom="2dp"-->
+<!--android:background="@drawable/card_background"-->
+
+        <com.twiter.Twittycoon.twittycoon.View.CircularImageView
+            android:layout_width="@dimen/notification_icon_width_height"
+            android:layout_height="@dimen/notification_icon_width_height"
+            android:id="@+id/imageViewUserImage"
+            android:layout_marginRight="5dp"
+            app:border_color="#EEEEEE"
+            app:border_width="2dp"
+            app:shadow="true"
+        />
+
+        <TextView
+            android:id="@+id/textViewFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="FullName"
+            android:layout_alignTop="@id/imageViewUserImage"
+            android:layout_toRightOf="@id/imageViewUserImage"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="\@NickName"
+            android:id="@+id/textViewNickName"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBottom="@+id/textViewFullName"
+            android:layout_toRightOf="@+id/textViewFullName"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/darker_gray"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="Medium Text"
+            android:id="@+id/textViewTweet"
+            android:layout_below="@+id/textViewFullName"
+            android:layout_toRightOf="@id/imageViewUserImage"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/textViewFullName"
+            >
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/date"
+                android:paddingRight="2dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+            />
+
+        </LinearLayout>
+
+
+</RelativeLayout>
+
+</FrameLayout>

@@ -1,15 +1,18 @@
 package com.twiter.Twittycoon.twittycoon.View;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.twiter.Twittycoon.twittycoon.App;
 import com.twiter.Twittycoon.twittycoon.R;
 import com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialList;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
@@ -28,9 +31,10 @@ public class ResultListFragment extends Fragment {
     }
 
     public void updateResultList(Searches results){
-        mSpecialListLayout.setListHeader(mResultListView);
+
         ResultsListAdapter mAdapter = new ResultsListAdapter(getActivity(), results);
         mResultListView.setAdapter(mAdapter);
+//        mResultListView.notify();
     }
 
     @Override
@@ -42,26 +46,50 @@ public class ResultListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-//        View v = inflater.inflate(R.layout.fragment_result_fragment, container, false);
         View v = inflater.inflate(R.layout.fragment_search_layout, container, false);
+
         mSpecialListLayout = (SpecialList) v.findViewById(R.id.specialListLayout);
         mSpecialListLayout.requestFocus();
-//        mResultListView = (ListView) v.findViewById(R.id.ListViewResults2);
+
         mResultListView = (ListView) v.findViewById(R.id.ListViewResults2);
+        mSpecialListLayout.setListHeader(mResultListView);
+
         mSearchEditText = (EditText) v.findViewById(R.id.editTextSearch);
         mSearchEditText.setOnClickListener(mEditTextClickListener);
-
+        mSearchEditText.addTextChangedListener(mSearchTextWatcher);
 
         return v;
     }
 
+    TextWatcher mSearchTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            if (!charSequence.toString().equals("")) {
+                mListener.onSearchRequested(charSequence.toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+//            Log.d("vladi", "afterTextChnaged");
+        }
+    };
+
     View.OnClickListener mEditTextClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((EditText)v).setText("");
+            Log.d(App.TAG,"onClick");
+            if (mSearchEditText.equals("  Twitter")) {
+                mSearchEditText.setText("");
+            }
         }
     };
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -81,7 +109,7 @@ public class ResultListFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
+        public void onSearchRequested(String searchTerm);
     }
 
 }

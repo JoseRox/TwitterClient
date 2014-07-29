@@ -2,6 +2,7 @@ package com.twiter.Twittycoon.twittycoon.Requests;
 
 import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.twiter.Twittycoon.twittycoon.App;
@@ -29,6 +30,11 @@ import java.net.URLEncoder;
 
 
 public class TwitterRequest extends AsyncTask<String, Void, String> implements IServerRequest {
+
+    public final static String FORBIDDEN = "Forbidden";
+    private static final String BADREQUEST = "Bad Request";
+
+
     private String mKey = null;
     private String mSecret = null;
     private IReceivedResultsListener mReceivedResultListener;
@@ -48,28 +54,37 @@ public class TwitterRequest extends AsyncTask<String, Void, String> implements I
     // onPostExecute convert the JSON results into a Twitter object (which is an Array list of tweets
     @Override
     protected void onPostExecute(String result) {
-        //TODO if result = BadRequest
+
         Searches searches = jsonToSearches(result);
-        mReceivedResultListener.onResultsReceived(searches);
+        if (searches != null) {
+            mReceivedResultListener.onResultsReceived(searches);
+        }
     }
 
     // download twitter searches after first checking to see if there is a network connection
 
     // converts a string of JSON data into a SearchResults object
+
     private Searches jsonToSearches(String result) {
-        Searches searches = null;
-        if (result != null && result.length() > 0) {
-            try {
-                Gson gson = new Gson();
-                // bring back the entire search object
-                SearchResults sr = gson.fromJson(result, SearchResults.class);
-                // but only pass the list of tweets found (called statuses)
-                searches = sr.getStatuses();
-            } catch (IllegalStateException ex) {
-                // just eat the exception for now, but you'll need to add some handling here
+//        Log.d(App.TAG, "TwitterRequest TwitterRequest() result: " + result);
+        if (!result.equals(FORBIDDEN) && !result.equals(BADREQUEST)) {
+            Searches searches = null;
+            if (result != null && result.length() > 0) {
+                try {
+                    Gson gson = new Gson();
+                    // bring back the entire search object
+                    SearchResults sr = gson.fromJson(result, SearchResults.class);
+                    // but only pass the list of tweets found (called statuses)
+                    searches = sr.getStatuses();
+                } catch (IllegalStateException ex) {
+                    // just eat the exception for now, but you'll need to add some handling here
+                }
             }
+            return searches;
+        }else{
+            Log.d(App.TAG, "TwitterRequest TwitterRequest() result: " + result);
+            return null;
         }
-        return searches;
     }
 
     // convert a JSON authentication object into an Authenticated object

@@ -2,10 +2,10 @@ package com.twiter.Twittycoon.twittycoon.Presenter;
 
 import android.content.Context;
 
-import com.twiter.Twittycoon.twittycoon.Requests.IServerRequest;
-import com.twiter.Twittycoon.twittycoon.View.ITwitterView;
 import com.twiter.Twittycoon.twittycoon.R;
+import com.twiter.Twittycoon.twittycoon.Requests.IServerRequest;
 import com.twiter.Twittycoon.twittycoon.Requests.TwitterRequest;
+import com.twiter.Twittycoon.twittycoon.View.ITwitterView;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
 
 public class TwitterPresenter implements IPresenter, IReceivedResultsListener {
@@ -20,7 +20,7 @@ public class TwitterPresenter implements IPresenter, IReceivedResultsListener {
     public TwitterPresenter(Context context,ITwitterView view) {
         mContext = context;
         mView = view;
-        mTwitterSearchRequest = new TwitterRequest();
+//        mTwitterSearchRequest = new TwitterRequest();
         mKey = mContext.getString(R.string.Key);
         mSecret = mContext.getString(R.string.Secret);
     }
@@ -33,6 +33,7 @@ public class TwitterPresenter implements IPresenter, IReceivedResultsListener {
     @Override
     public void pullData() {
         //start server connection
+        mTwitterSearchRequest = new TwitterRequest();
         mTwitterSearchRequest.start(mKey, mSecret, mSearchParam, this);
     }
 

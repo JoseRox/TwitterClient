@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;

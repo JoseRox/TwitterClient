@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import com.twiter.Twittycoon.twittycoon.App;
 import com.twiter.Twittycoon.twittycoon.R;
-import com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialList;
+import com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialListParentLayout;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
 
 public class ResultListFragment extends Fragment {
@@ -23,7 +23,7 @@ public class ResultListFragment extends Fragment {
 //    private ListView mResultListView;
     private ListView mResultListView;
     private OnFragmentInteractionListener mListener;
-    private SpecialList mSpecialListLayout;
+    private SpecialListParentLayout mSpecialListParentLayout;
     private EditText mSearchEditText;
 
     public ResultListFragment() {
@@ -48,11 +48,14 @@ public class ResultListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_layout, container, false);
 
-        mSpecialListLayout = (SpecialList) v.findViewById(R.id.specialListLayout);
-        mSpecialListLayout.requestFocus();
+        mSpecialListParentLayout = (SpecialListParentLayout) v.findViewById(R.id.specialListLayout);
+//        mSpecialListLayout.requestFocus();
 
         mResultListView = (ListView) v.findViewById(R.id.ListViewResults2);
-        mSpecialListLayout.setListHeader(mResultListView);
+        Searches items = new Searches();
+        mResultListView.setAdapter(new ResultsListAdapter(getActivity(),items));
+
+        mSpecialListParentLayout.setListHeader(mResultListView);
 
         mSearchEditText = (EditText) v.findViewById(R.id.editTextSearch);
         mSearchEditText.setOnClickListener(mEditTextClickListener);

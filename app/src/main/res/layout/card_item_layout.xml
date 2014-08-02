@@ -7,26 +7,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/search_bg_shadow"
         android:orientation="horizontal"
+        android:background="@drawable/card"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal|bottom">
+        <!-->-->
 
-        >
 
-        <!--android:layout_marginLeft="4dp"-->
-        <!--android:layout_marginRight="4dp"-->
-        <!--android:layout_marginTop="4dp"-->
-        <!--android:layout_marginBottom="2dp"-->
 <!--android:background="@drawable/card_background"-->
 
         <com.twiter.Twittycoon.twittycoon.View.CircularImageView
             android:layout_width="@dimen/notification_icon_width_height"
             android:layout_height="@dimen/notification_icon_width_height"
             android:id="@+id/imageViewUserImage"
-            android:layout_marginRight="5dp"
             app:border_color="#EEEEEE"
             app:border_width="2dp"
             app:shadow="true"
-        />
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+             />
 
         <TextView
             android:id="@+id/textViewFullName"
@@ -67,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@id/textViewFullName"
-            >
+            android:id="@+id/linearLayout">
 
             <ImageView
                 android:layout_width="15dp"
@@ -82,11 +85,48 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@android:color/darker_gray"
+                android:text="3"
             />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/textViewTweet"
+            android:layout_toRightOf="@+id/imageViewUserImage"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            >
 
-</RelativeLayout>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageViewPopularStar"
+                android:src="@drawable/greystar"
+                android:layout_marginRight="20dp"
+                />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageViewRetweet"
+                android:src="@drawable/retweet"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:id="@+id/textViewRetweeted"
+
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </FrameLayout>

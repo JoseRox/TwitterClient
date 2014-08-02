@@ -24,6 +24,8 @@ public class MainActivity extends FragmentActivity implements ResultListFragment
 
         mTwitterPresenter = new TwitterPresenter(getApplicationContext(), this);
 
+        //Todo Connecting to twitter + progress bar loading
+
         if (savedInstanceState == null) {
             ResultListFragment listFragment = new ResultListFragment();
             getSupportFragmentManager().beginTransaction()

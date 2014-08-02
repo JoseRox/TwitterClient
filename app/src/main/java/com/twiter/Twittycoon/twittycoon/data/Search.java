@@ -40,6 +40,11 @@ public class Search {
 	@SerializedName("user")
 	private TwitterUser User;
 
+    @SerializedName("metadata")
+    private TweetMetadata tweetMetadata;
+
+
+
 	public String getDateCreated() {
 		return DateCreated;
 	}
@@ -136,7 +141,13 @@ public class Search {
 		User = user;
 	}
 
-	@Override
+    public void setTweetMetaData(TweetMetadata tweetMeta){
+        tweetMetadata = tweetMeta;
+    }
+
+    public TweetMetadata getTweetMetaData() {return tweetMetadata;}
+
+    @Override
 	public String  toString(){
 		return getText();
 	}

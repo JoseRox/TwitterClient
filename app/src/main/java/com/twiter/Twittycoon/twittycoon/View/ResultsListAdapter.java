@@ -7,14 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.squareup.picasso.Picasso;
 import com.twiter.Twittycoon.twittycoon.R;
-import com.twiter.Twittycoon.twittycoon.Requests.VolleyWrapper;
 import com.twiter.Twittycoon.twittycoon.data.Search;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
+import com.twiter.Twittycoon.twittycoon.data.TweetMetadata;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,15 +30,17 @@ public class ResultsListAdapter extends ArrayAdapter {
     public ResultsListAdapter(Context context,Searches objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
         mContext = context;
-        mImageLoader = VolleyWrapper.getInstance(mContext).getImageLoader();
     }
 
     private class ViewHolder{
         private TextView mFullName;
         private TextView mNickName;
         private TextView mTweet;
-        private CircularImageView mUserImage;
+//        private CircularImageView mUserImage;
+        private ImageView mUserImage;
         private TextView mDateCreated;
+        private TextView mRetweeted;
+        private ImageView mPopularStar;
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
@@ -53,8 +56,12 @@ public class ResultsListAdapter extends ArrayAdapter {
             holder.mFullName = (TextView)viewToUse.findViewById(R.id.textViewFullName);
             holder.mNickName = (TextView)viewToUse.findViewById(R.id.textViewNickName);
             holder.mTweet = (TextView)viewToUse.findViewById(R.id.textViewTweet);
-            holder.mUserImage = (CircularImageView) viewToUse.findViewById(R.id.imageViewUserImage);
+//            holder.mUserImage = (CircularImageView) viewToUse.findViewById(R.id.imageViewUserImage);
+            holder.mUserImage = (ImageView) viewToUse.findViewById(R.id.imageViewUserImage);
             holder.mDateCreated = (TextView) viewToUse.findViewById(R.id.textViewCreated);
+
+            holder.mRetweeted = (TextView) viewToUse.findViewById(R.id.textViewRetweeted);
+            holder.mPopularStar = (ImageView) viewToUse.findViewById(R.id.imageViewPopularStar);
 
             viewToUse.setTag(holder);
 
@@ -75,6 +82,16 @@ public class ResultsListAdapter extends ArrayAdapter {
         Picasso.with(mContext).load(item.getUser().getProfileFullImageUrl())
                                 .placeholder(R.drawable.contact_picture_placeholder)
                                 .into(holder.mUserImage);
+
+
+        TweetMetadata tweetMetadata = item.getTweetMetaData();
+        if (tweetMetadata.getRecentRetweets() > 0){
+            holder.mRetweeted.setText(tweetMetadata.getRecentRetweets());
+        }
+
+        if (tweetMetadata.getResultType().equals("popular")){
+            holder.mPopularStar.setImageDrawable(mContext.getResources().getDrawable(R.drawable.star));
+        }
 
         return viewToUse;
     }

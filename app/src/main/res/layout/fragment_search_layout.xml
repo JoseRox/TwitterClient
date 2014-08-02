@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--<LinearLayout-->
-<com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialList
-
+<!--<com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialListParentLayout-->
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -13,22 +13,24 @@
     <!--android:focusableInTouchMode="true"-->
 
 
-    <LinearLayout
 
+    <LinearLayout
         android:id="@+id/spacerView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/resultListSpace"
         android:background="@drawable/rsz_bg_waves"
         android:scaleType="center"
         android:adjustViewBounds="true"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         >
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:hint="  Twitter"
+            android:layout_height="70dp"
+            android:hint="@string/Twitter"
             android:id="@+id/editTextSearch"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -40,17 +42,40 @@
 
     </LinearLayout>
 
-    //TODO add recent tweets caption
 
 
-        <ListView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ListViewResults2"
-        android:divider="@null"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Recent tweets"
+        android:id="@+id/textViewSearchTerm"
+        android:background="@drawable/card_background"
+        android:layout_below="@+id/spacerView"
+
         />
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ListViewResults"
+        android:divider="@null"
+        android:layout_below="@+id/textViewSearchTerm"
 
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
 
-<!--</LinearLayout>-->
-</com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialList>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarLoading"
+        android:indeterminate="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
+<!--</com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialListParentLayout>-->
+    <!--</LinearLayout>-->

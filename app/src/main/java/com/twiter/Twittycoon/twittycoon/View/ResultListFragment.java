@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.twiter.Twittycoon.twittycoon.App;
 import com.twiter.Twittycoon.twittycoon.R;
-import com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialListParentLayout;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
 
 public class ResultListFragment extends Fragment {
@@ -23,43 +24,49 @@ public class ResultListFragment extends Fragment {
 //    private ListView mResultListView;
     private ListView mResultListView;
     private OnFragmentInteractionListener mListener;
-    private SpecialListParentLayout mSpecialListParentLayout;
+//    private SpecialListParentLayout mSpecialListParentLayout;
+
+    private RelativeLayout mSpecialListParentLayout;
+
     private EditText mSearchEditText;
+    private ProgressBar mProgressBar;
 
     public ResultListFragment() {
         // Required empty public constructor
     }
 
     public void updateResultList(Searches results){
-
+        mProgressBar.setVisibility(View.GONE);
         ResultsListAdapter mAdapter = new ResultsListAdapter(getActivity(), results);
         mResultListView.setAdapter(mAdapter);
-//        mResultListView.notify();
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_layout, container, false);
 
-        mSpecialListParentLayout = (SpecialListParentLayout) v.findViewById(R.id.specialListLayout);
+//        mSpecialListParentLayout = (SpecialListParentLayout) v.findViewById(R.id.specialListLayout);
 //        mSpecialListLayout.requestFocus();
 
-        mResultListView = (ListView) v.findViewById(R.id.ListViewResults2);
+        mSpecialListParentLayout = (RelativeLayout) v.findViewById(R.id.specialListLayout);
+
+        mResultListView = (ListView) v.findViewById(R.id.ListViewResults);
+//        mSpecialListParentLayout.setListHeader(mResultListView);
         Searches items = new Searches();
         mResultListView.setAdapter(new ResultsListAdapter(getActivity(),items));
-
-        mSpecialListParentLayout.setListHeader(mResultListView);
 
         mSearchEditText = (EditText) v.findViewById(R.id.editTextSearch);
         mSearchEditText.setOnClickListener(mEditTextClickListener);
         mSearchEditText.addTextChangedListener(mSearchTextWatcher);
+
+        mProgressBar = (ProgressBar) v.findViewById(R.id.progressBarLoading);
 
         return v;
     }
@@ -72,14 +79,14 @@ public class ResultListFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            if (!charSequence.toString().equals("")) {
+            if (!charSequence.toString().equals("") && !charSequence.toString().equals("#")) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 mListener.onSearchRequested(charSequence.toString());
             }
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
-//            Log.d("vladi", "afterTextChnaged");
         }
     };
 

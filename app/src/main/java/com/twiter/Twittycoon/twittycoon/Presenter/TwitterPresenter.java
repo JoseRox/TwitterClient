@@ -3,12 +3,12 @@ package com.twiter.Twittycoon.twittycoon.Presenter;
 import android.content.Context;
 
 import com.twiter.Twittycoon.twittycoon.R;
-import com.twiter.Twittycoon.twittycoon.Requests.IServerRequest;
-import com.twiter.Twittycoon.twittycoon.Requests.TwitterRequest;
+import com.twiter.Twittycoon.twittycoon.TwitterRequests.IServerRequest;
+import com.twiter.Twittycoon.twittycoon.TwitterRequests.TwitterRequest;
 import com.twiter.Twittycoon.twittycoon.View.ITwitterView;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
 
-public class TwitterPresenter implements IPresenter, IReceivedResultsListener {
+public class TwitterPresenter implements IPresenter {
 
     private Context mContext;
     private ITwitterView mView;
@@ -23,6 +23,7 @@ public class TwitterPresenter implements IPresenter, IReceivedResultsListener {
 //        mTwitterSearchRequest = new TwitterRequest();
         mKey = mContext.getString(R.string.Key);
         mSecret = mContext.getString(R.string.Secret);
+        mTwitterSearchRequest = new TwitterRequest(mContext);
     }
 
     @Override
@@ -32,14 +33,35 @@ public class TwitterPresenter implements IPresenter, IReceivedResultsListener {
 
     @Override
     public void pullData() {
-        //start server connection
-        mTwitterSearchRequest = new TwitterRequest();
-        mTwitterSearchRequest.start(mKey, mSecret, mSearchParam, this);
+
+        if (mTwitterSearchRequest instanceof TwitterRequest) {
+            TwitterRequest.AuthState authState = ((TwitterRequest) mTwitterSearchRequest).getAuthenticationState();
+
+            if (authState == TwitterRequest.AuthState.AUTHENTICATED) {
+                searchFotTweets();
+            } else if (authState == TwitterRequest.AuthState.NOT_AUTHENTICATED){
+                mTwitterSearchRequest.requestAuth(mKey, mSecret, new ICompleteAuthListener() {
+                    @Override
+                    public void onCompleted() {
+                        searchFotTweets();
+                    }
+                });
+            }
+        }
+
+
     }
 
-    @Override
-    public void onResultsReceived(Searches results) {
-        //get result from server
-        mView.showResultList(results);
+    private void searchFotTweets() {
+        mTwitterSearchRequest.requestSearch(mSearchParam,new ICompletedResultsListener() {
+            @Override
+            public void onCompletedResults(Searches results) {
+                if (mView != null) {
+                    mView.showResultList(results);
+                }
+            }
+        });
     }
+
+
 }

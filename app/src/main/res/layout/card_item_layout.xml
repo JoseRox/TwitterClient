@@ -105,7 +105,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:id="@+id/imageViewPopularStar"
-                android:src="@drawable/greystar"
+                android:src="@drawable/greystar2"
                 android:layout_marginRight="20dp"
                 />
 

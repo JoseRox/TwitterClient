@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout-->
-<!--<com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialListParentLayout-->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/specialListLayout"
-
     >
-    <!--android:descendantFocusability="beforeDescendants"-->
-    <!--android:focusableInTouchMode="true"-->
-
-
 
     <LinearLayout
         android:id="@+id/spacerView"
@@ -36,19 +30,16 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/search_bg_shadow"
-
             />
-        <!--android:background="@drawable/text_view_round_corners"-->
 
     </LinearLayout>
-
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Recent tweets"
+        android:text="@string/recentTweets"
         android:id="@+id/textViewSearchTerm"
         android:background="@drawable/card_background"
         android:layout_below="@+id/spacerView"
@@ -61,7 +52,6 @@
         android:id="@+id/ListViewResults"
         android:divider="@null"
         android:layout_below="@+id/textViewSearchTerm"
-
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         />
@@ -77,5 +67,4 @@
         />
 
 </RelativeLayout>
-<!--</com.twiter.Twittycoon.twittycoon.View.CustomLayouts.SpecialListParentLayout>-->
-    <!--</LinearLayout>-->
+

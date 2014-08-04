@@ -41,11 +41,8 @@ public class TwitterResultsParser implements Response.Listener<JSONObject> {
                     tweet.setSource(tweetJson.getString("source"));
                     tweet.setIsTruncated(tweetJson.getBoolean("truncated"));
 
-
                     tweet.setInReplyToStatusId(parseLong(tweetJson.getString("in_reply_to_status_id")));
                     tweet.setInReplyToStatusIdStr(tweetJson.getString("in_reply_to_status_id_str"));
-
-//                        String z = tweetJson.getString("in_reply_to_user_id");
 
                     tweet.setInReplyToUserId(parseLong(tweetJson.getString("in_reply_to_user_id")));
                     tweet.setInReplyToUserIdStr(tweetJson.getString("in_reply_to_user_id_str"));

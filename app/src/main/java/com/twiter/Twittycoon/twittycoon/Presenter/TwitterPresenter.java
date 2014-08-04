@@ -20,7 +20,6 @@ public class TwitterPresenter implements IPresenter {
     public TwitterPresenter(Context context,ITwitterView view) {
         mContext = context;
         mView = view;
-//        mTwitterSearchRequest = new TwitterRequest();
         mKey = mContext.getString(R.string.Key);
         mSecret = mContext.getString(R.string.Secret);
         mTwitterSearchRequest = new TwitterRequest(mContext);

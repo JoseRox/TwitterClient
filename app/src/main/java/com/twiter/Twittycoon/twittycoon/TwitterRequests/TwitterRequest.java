@@ -27,9 +27,6 @@ public class TwitterRequest implements IServerRequest{
     public final static String TwitterTokenURL = "https://api.twitter.com/oauth2/token";
     public final static String TwitterSearchURL = "https://api.twitter.com/1.1/search/tweets.json?q=";
 
-    public final static String TwitterGeoURL = "http://api.twitter.com/1/geo/search.json?query=israel";
-    public final static String TwitterPopularURL = "http://search.twitter.com/search.json?q=";
-
 
     private Context mContext;
     private RequestQueue mRequestQueue;
@@ -84,7 +81,7 @@ public class TwitterRequest implements IServerRequest{
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("vladi", "search error: " + error);
+                Log.d(App.TAG, "search error: " + error);
             }
         };
     }
@@ -94,13 +91,13 @@ public class TwitterRequest implements IServerRequest{
             @Override
             public void onResponse(String response) {
 
-                Log.d("vladi", "response: " + response);
+                Log.d(App.TAG, "response: " + response);
 
                 JSONObject object = null;
                 try {
                     object = new JSONObject(response);
                     if (object.optString("token_type").equals("bearer")) {
-                        Log.d("vladi", "access_token: " + object.optString("access_token"));
+                        Log.d(App.TAG, "access_token: " + object.optString("access_token"));
                         mAccessToken = object.optString("access_token");
                         completeAuthListener.onCompleted();
                         mAuthState = AuthState.AUTHENTICATED;
@@ -120,7 +117,7 @@ public class TwitterRequest implements IServerRequest{
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("vladi", "error: " + error);
+                Log.d(App.TAG, "error: " + error);
             }
         };
     }

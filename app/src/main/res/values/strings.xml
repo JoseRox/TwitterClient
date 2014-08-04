@@ -6,5 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Twitter">  Twitter</string>
+    <string name="FullName">FullName</string>
+    <string name="NickName">\@NickName</string>
+    <string name="MediumText">Medium Text</string>
+    <string name="recentTweets">Recent tweets</string>
 
 </resources>

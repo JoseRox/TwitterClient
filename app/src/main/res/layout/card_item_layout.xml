@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,20 +14,15 @@
         android:layout_marginBottom="3dp"
         android:padding="5dp"
         android:layout_gravity="center_horizontal|bottom">
-        <!-->-->
 
 
-<!--android:background="@drawable/card_background"-->
-
-        <com.twiter.Twittycoon.twittycoon.View.CircularImageView
+        <ImageView
             android:layout_width="@dimen/notification_icon_width_height"
             android:layout_height="@dimen/notification_icon_width_height"
             android:id="@+id/imageViewUserImage"
-            app:border_color="#EEEEEE"
-            app:border_width="2dp"
-            app:shadow="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="5dp"
+            android:background="@drawable/text_view_round_corners"
              />
 
         <TextView
@@ -37,7 +31,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:text="FullName"
+            android:text="@string/FullName"
             android:layout_alignTop="@id/imageViewUserImage"
             android:layout_toRightOf="@id/imageViewUserImage"
             />
@@ -46,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="\@NickName"
+            android:text="@string/NickName"
             android:id="@+id/textViewNickName"
             android:layout_marginLeft="5dp"
             android:layout_alignBottom="@+id/textViewFullName"
@@ -59,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:text="Medium Text"
+            android:text="@string/MediumText"
             android:id="@+id/textViewTweet"
             android:layout_below="@+id/textViewFullName"
             android:layout_toRightOf="@id/imageViewUserImage"

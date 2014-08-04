@@ -13,8 +13,8 @@ import com.twiter.Twittycoon.twittycoon.data.Searches;
 
 public class MainActivity extends FragmentActivity implements ResultListFragment.OnFragmentInteractionListener, ITwitterView {
 
+    private final static String RESULT_LIST_FRAGMENT = "ListFragment";
     private IPresenter mTwitterPresenter;
-//    final static String SearchTerm = "from:alexiskold";
 //    final static String SearchTerm = "#israel";
 
 	@Override
@@ -24,19 +24,17 @@ public class MainActivity extends FragmentActivity implements ResultListFragment
 
         mTwitterPresenter = new TwitterPresenter(getApplicationContext(), this);
 
-        //Todo Connecting to twitter + progress bar loading
-
         if (savedInstanceState == null) {
             ResultListFragment listFragment = new ResultListFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, listFragment, "ListFragment").commit();
+                    .add(R.id.fragment_container, listFragment, RESULT_LIST_FRAGMENT).commit();
         }
 	}
 
 
     @Override
     public void showResultList(Searches results) {
-        ResultListFragment ResultListFragment = (ResultListFragment)getSupportFragmentManager().findFragmentByTag("ListFragment");
+        ResultListFragment ResultListFragment = (ResultListFragment)getSupportFragmentManager().findFragmentByTag(RESULT_LIST_FRAGMENT);
         ResultListFragment.updateResultList(results);
 
     }

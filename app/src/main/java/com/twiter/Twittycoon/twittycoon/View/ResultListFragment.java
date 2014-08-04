@@ -5,31 +5,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
-import com.twiter.Twittycoon.twittycoon.App;
 import com.twiter.Twittycoon.twittycoon.R;
 import com.twiter.Twittycoon.twittycoon.data.Searches;
 
 public class ResultListFragment extends Fragment {
 
-    private Activity mActivity;
-//    private ListView mResultListView;
     private ListView mResultListView;
     private OnFragmentInteractionListener mListener;
-//    private SpecialListParentLayout mSpecialListParentLayout;
-
-    private RelativeLayout mSpecialListParentLayout;
-
     private EditText mSearchEditText;
     private ProgressBar mProgressBar;
+    private static final String TWITTER = "  Twitter";
 
     public ResultListFragment() {
         // Required empty public constructor
@@ -45,20 +37,13 @@ public class ResultListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivity = getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_layout, container, false);
 
-//        mSpecialListParentLayout = (SpecialListParentLayout) v.findViewById(R.id.specialListLayout);
-//        mSpecialListLayout.requestFocus();
-
-        mSpecialListParentLayout = (RelativeLayout) v.findViewById(R.id.specialListLayout);
-
         mResultListView = (ListView) v.findViewById(R.id.ListViewResults);
-//        mSpecialListParentLayout.setListHeader(mResultListView);
         Searches items = new Searches();
         mResultListView.setAdapter(new ResultsListAdapter(getActivity(),items));
 
@@ -93,8 +78,7 @@ public class ResultListFragment extends Fragment {
     View.OnClickListener mEditTextClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d(App.TAG,"onClick");
-            if (mSearchEditText.equals("  Twitter")) {
+            if (mSearchEditText.equals(TWITTER)) {
                 mSearchEditText.setText("");
             }
         }

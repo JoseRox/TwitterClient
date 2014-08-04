@@ -21,9 +21,12 @@
             android:layout_height="@dimen/notification_icon_width_height"
             android:id="@+id/imageViewUserImage"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/text_view_round_corners"
-             />
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="6dp"
+
+            />
+
 
         <TextView
             android:id="@+id/textViewFullName"

@@ -50,7 +50,6 @@ public class ResultListFragment extends Fragment {
         mSearchEditText = (EditText) v.findViewById(R.id.editTextSearch);
         mSearchEditText.setOnClickListener(mEditTextClickListener);
         mSearchEditText.addTextChangedListener(mSearchTextWatcher);
-
         mProgressBar = (ProgressBar) v.findViewById(R.id.progressBarLoading);
 
         return v;
